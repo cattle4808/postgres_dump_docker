@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    container_name: soff_db_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: soffstudy
+      POSTGRES_DB: soffstudy
+      POSTGRES_PASSWORD: soffstudy
+    ports:
+      - "5544:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+
+    networks:
+      soff_network:
+volumes:
+  postgres_data:
+
+networks:
+  soff_network:
+    driver: bridge
